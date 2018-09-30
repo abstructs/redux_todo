@@ -1,5 +1,5 @@
 ## Redux tutorial
-I'll also write some notes and update them as I understand redux a bit better.
+My notes and code going through the redux tutorial at [](https://redux.js.org/).
 
 ## Actions
 Actions are an object that have a type and some user defined data that get dispatched to the store. 
@@ -76,7 +76,7 @@ function todos(state = [], action) { ... }
 function visibilityFilter(state = SHOW_ALL, action) { ... }
 ```
 
-These functions take in **todos** and **visiblityFilter** respectively. The cases where the state passed in is undefined is handled by the default parameter.
+These functions take in **todos** and **visiblityFilter** respectively. The cases where the state passed in is undefined are handled by the default parameter.
 
 We can create a file to handle these reducers and create an object using **combineReducers** to package together our reducers.
 
@@ -99,7 +99,6 @@ In a redux app you'll only have one store.
 To create a store we import the result of our ```combineReducers()``` call from the previous section and pass it to ```createStore()```.
 
 ```
-
 import { createStore } from 'redux'
 import todoApp from './reducers'
 
@@ -107,7 +106,7 @@ const store = createStore(todoApp)
 
 store.getState() // outputs: { todos: [], visibiltyFilter: SHOW_ALL }
 
-store.dispatch(addTodo("Start a project")); // dispatches "ADD_TODO" with data
+store.dispatch(addTodo("Start a project")) // dispatches "ADD_TODO" with data
 
 store.getState() // outsput: { todos: [{ text: "Start a project", completed: false }], visibiltyFilter: SHOW_ALL }
 ```
@@ -122,6 +121,5 @@ const unsubscribe = store.listener(() => {
 
 The ```store.listener()``` function returns a method to unregister a listener when called.
 
-To stop listening to changes that occur to the store just call the unsubscribe method.
+To stop listening to changes that occur to the store just call ```unsubscribe()```.
 
-```unsubscribe()```
