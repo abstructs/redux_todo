@@ -90,3 +90,38 @@ const todoApp = combineReducers({
 ```
 
 ## Store
+The store brings our actions and reducers together.
+
+It holds the state, gives access to the state, allows the state to be updated, and adds and removes listeners.
+
+In a redux app you'll only have one store.
+
+To create a store we import the result of our ```combineReducers()``` call from the previous section and pass it to ```createStore()```.
+
+```
+
+import { createStore } from 'redux'
+import todoApp from './reducers'
+
+const store = createStore(todoApp)
+
+store.getState() // outputs: { todos: [], visibiltyFilter: SHOW_ALL }
+
+store.dispatch(addTodo("Start a project")); // dispatches "ADD_TODO" with data
+
+store.getState() // outsput: { todos: [{ text: "Start a project", completed: false }], visibiltyFilter: SHOW_ALL }
+```
+
+You can also add a listener to the store that gets called when the store is updated.
+
+``` 
+const unsubscribe = store.listener(() => {
+  console.log(store.getState()) // logs the state everytime the store is updated
+})
+```
+
+The ```store.listener()``` function returns a method to unregister a listener when called.
+
+To stop listening to changes that occur to the store just call the unsubscribe method.
+
+```unsubscribe()```
